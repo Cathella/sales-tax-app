@@ -1,21 +1,18 @@
-# Get Item Name
-print "Item Name: "
-item_name = gets
+basic_sales_tax = 0.1
+import_sales_tax = 0.05
+total_sales_tax = 0
+total_price = 0
 
-# Get Item Price
-print "Item Price: "
-item_price = gets.to_f
-
-puts "-----------------------------------"
-puts "Item: #{item_name}"
-puts "Price: " + item_price.to_s
-
-# Get Tax on the Item
-sales_tax = (0.1 * item_price).round(2)
-puts "Tax: " + sales_tax.to_s
-
-# Get Total Item Price
-total_item_price = item_price + sales_tax
-print "Price after tax: "
-puts total_item_price
-puts "-----------------------------------"
+File.open("input_1.dat") do |f|
+  while item = f.gets
+    quantity, product, price = item.chomp.split(', ')
+    tax = (basic_sales_tax * price.to_f).round(2)
+    price_after_tax = (tax + price.to_f).round(2)
+    puts "#{quantity}, #{product}, price: #{price_after_tax}"
+    total_sales_tax += tax
+    total_price += price_after_tax
+  end
+  puts "Sales Taxes: " + total_sales_tax.to_s
+  print "Total: "
+  puts total_price.round(2)
+end
