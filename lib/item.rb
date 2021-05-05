@@ -13,7 +13,7 @@ class Item
     tax_sum = 0.0
     total_price = 0.0
 
-    File.open("input_3.dat") do |f|
+    File.open("../files/input_2.csv") do |f|
       while item = f.gets
         quantity, product, price = item.chomp.split(', ')
 
